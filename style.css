@@ -1,0 +1,42 @@
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#top{
+    margin-top: 5%;
+}
+#inp{
+    width: 140px;
+    border: none;
+   border-bottom: 2px solid silver;
+   outline:none;
+   
+}
+#white{
+    height: 500px;
+}
+.hr_line{
+    color: rgb(204, 204, 251);
+    size: 5;
+}
+.head{
+    color: azure;
+}
+.heads{
+    color: aqua;
+}
+.img{
+    text-align: center;
+}
+@media(max-width: 991px){
+    #no-display{
+       display: none;
+    }
+    #white{
+        height: 700px;
+    }
+}
+@media(min-width: 991px){
+    #no-display1{
+        display: none;
+     }
+}

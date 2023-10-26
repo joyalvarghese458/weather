@@ -1,0 +1,148 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEATHER</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<!-- fond awsome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- bootstrap cdn -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<!-- bootsrap js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<!-- <body style="background-image: url('http://www.photos-public-domain.com/wp-content/uploads/2010/09/dark_clouds.jpg'); background-size: cover;"> -->
+    <body style="background-color: aqua;">
+        
+  
+    <div id="top" class="row">
+         <div class="col-2 "></div>
+         <div class="col-8">
+            <div class="row mt-5 mb-5" id="main">
+
+                  <div id="white" class="col-lg-7 position-relative" style="background-color: white;">
+                    <h2 class="mt-4 ms-3">WEATHER</h2>
+                    <div class="img">
+                            <div class="mt-5" id="imgs">  
+                                <video style="width: 100%; height: 40%;"  loop autoplay muted>
+                                    <source src="g/v.mp.mp4" type="video/mp4">
+                                </video>  
+                               
+                            <div class="imgd">_ _</div>
+                            </div>                       
+                             <h4 class="mt-3">Temperature</h4>
+                        <h6 id="temp"></h6>
+                    </div>
+                    <div>
+                    <div>
+                        <p style="font-size: 19px;" class="mt-4">Sun Rise : <span style="font-size: 13px;" id="sunrise"> _ _</span> </p>
+                    </div>
+                    <div>
+                        <p style="font-size: 19px;" class="mt-3">Sun Set : <span style="font-size: 13px;" id="sunset">_ _</span>
+                           
+                         </p>
+                    </div>
+                    </div>
+
+                    <div id="no-display1">
+                        <div>
+                            <p style="font-size: 19px;" class="mt-4">Place : <span style="font-size: 13px;" id="place1"> _ _</span> </p>
+                        </div>
+                        <div>
+                            <p style="font-size: 19px;" class="mt-3">In Sky : <span style="font-size: 13px;" id="cloudss1">_ _</span>
+                               
+                             </p>
+                        </div>
+                        </div>
+
+                    <div id="no-display" class="position-absolute bottom-0 end-0 me-3">
+                        <div>
+                            <p style="font-size: 19px;" class="mt-4">Place : <span style="font-size: 13px;" id="place"> _ _</span> </p>
+                        </div>
+                        <div>
+                            <p style="font-size: 19px;" class="mt-3">In Sky : <span style="font-size: 13px;" id="cloudss">_ _</span>
+                               
+                             </p>
+                        </div>
+                        </div>
+
+                  </div>
+
+                  <div class="col-lg-5" style="background-image: url('https://static.pexels.com/photos/236970/pexels-photo-236970.jpeg'); background-size: cover; height: 500px;">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #f9fafa;"></i>
+                      <input  id="inp" class="mt-5 " type="text" placeholder="search city">
+                    <input onclick="search()" type="button" value="search">
+                           
+                           <h4 class="heads mt-4">Weather Details</h4>
+                           <hr class="hr_line">
+                           <h5 class="heads">Country</h5>
+                           <h6 id="country" class="head">_ _</h6><br>
+                           <h5 class="heads">Humidity</h5>
+                           <h6 id="Humidity" class="head">_ _</h6><br>
+                           <h5 class="heads">Wind</h5>
+                           <h6 id="wind" class="head">_ _</h6><br>
+                            <h5 class="heads">Pressure</h5>
+                            <h6 id="pressure" class="head">_ _</h6>
+
+                            <hr class="hr_line">
+                  </div>
+
+            </div>
+         </div>
+         <div class="col-2"></div>
+    </div>
+</body>
+
+<script>
+    function search(){
+        let cityName = inp.value
+        console.log(cityName);
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=b115263b4fad58d62a7c2dc89d9019e0`).then((response)=>{console.log(response.json().then((mweather)=>{console.log(mweather);
+            
+            var mySunset = new Date( mweather.sys.sunset *1000);
+            hour = mySunset.getHours()
+            min = mySunset.getMinutes()
+            var mySunRise = new Date( mweather.sys.sunrise *1000);
+            shour = mySunRise.getHours()
+            smin = mySunRise.getMinutes()
+
+            country.innerHTML = mweather.sys.country;
+            pressure.innerHTML = mweather.main.pressure;
+            wind.innerHTML = mweather.wind.speed +" "+"kmph"
+            Humidity.innerHTML = mweather.main.humidity +" "+"%"
+            sunrise.innerHTML = `${shour} : ${smin} ${shour>=12?'PM':'AM'}`
+            sunset.innerHTML = `${hour} : ${min} ${hour>=12?'PM':'AM'}`
+            cloudss.innerHTML = mweather.weather[0].description
+            place.innerHTML = mweather.name
+            cloudss1.innerHTML = mweather.weather[0].description
+            place1.innerHTML = mweather.name
+            
+            
+            let cel=eval(mweather.main.temp-273.15)
+            let cell = cel.toFixed(1)
+            temp.innerHTML = cell +" "+"°C"
+
+           
+                if(mweather.weather[0].main == 'Rain'){
+                    imgs.innerHTML = '<img src="./g/rain.png" width="40%" height="40%"  alt="">'
+                }else if(mweather.weather[0].main == 'Mist'){
+                    imgs.innerHTML = '<img src="./g/mist.png" width="40%" height="40%" alt="">'
+                }else if(mweather.weather[0].main == 'Clouds'){
+                    imgs.innerHTML = '<img src="./g/cloud.png" width="40%" height="40%" alt="">'
+                }else if(mweather.weather[0].main == 'Clear'){
+                    imgs.innerHTML = '<img src="./g/clear.png" width="40%" height="40%" alt="">'
+                }else if(mweather.weather[0].main == 'Orizzle'){
+                    imgs.innerHTML = '<img src="./g/orizzle.png" width="40%" height="40%" alt="">'
+                }
+                    
+                
+          
+
+
+        }));}).catch((error)=>{console.log('error');})
+    }
+
+</script>
+
+</html>
